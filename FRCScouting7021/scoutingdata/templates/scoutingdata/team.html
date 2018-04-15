@@ -14,9 +14,12 @@
 {% for event in events %}
 
 <h3>{{ event.name }}</h3>
+Location: {{ event.city }}, {{ event.state_prov }}
+<br />
+<a target="_blank" href="https://www.thebluealliance.com/event/{{event.key}}">TBA Link</a>
 
-{{ event.city }}
-
+<br />
+<br />
 {% endfor %}
 
 {% endif %}
