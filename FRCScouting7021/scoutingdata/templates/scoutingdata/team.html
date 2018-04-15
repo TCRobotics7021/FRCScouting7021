@@ -16,7 +16,7 @@
 <h3>{{ event.name }}</h3>
 Location: {{ event.city }}, {{ event.state_prov }}
 <br />
-<a target="_blank" href="https://www.thebluealliance.com/event/{{event.key}}">TBA Link</a>
+<a target="_blank" href="https://www.thebluealliance.com/event/{{event.key}}">TBA Link</a> | <a href="{% url 'scoutingdata:event' event.key %}">Event Page</a>
 
 <br />
 <br />

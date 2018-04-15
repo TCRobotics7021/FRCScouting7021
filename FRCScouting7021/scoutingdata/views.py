@@ -44,4 +44,20 @@ def team(request, teamNum):
         return render(request, 'scoutingdata/event.html', {"error":"Could not retrieve team events."})
 
 def event(request, eventCode):
-    return render(request, 'scoutingdata/event.html', {'eventCode':eventCode})
+    logger = logging.getLogger(__name__)
+    logger.error('Team Num: ' + str(eventCode))
+    # get list of events for this team
+    # https://www.thebluealliance.com/api/v3/team/{TEAM_CODE}/events/simple
+    
+    call = endpoint + "team/frc" + str(teamNum) + "/events/simple"
+    
+    r = requests.get(call, headers={'X-TBA-Auth-Key':api_key})
+
+    if r.status_code == 200:
+        # successful call
+        parsed_json = r.json()
+        return render(request, 'scoutingdata/team.html', {'eventCode':eventCode,'events':parsed_json})
+
+    else:
+        # unsuccessful call
+        return render(request, 'scoutingdata/event.html', {"error":"Could not retrieve event data."})
