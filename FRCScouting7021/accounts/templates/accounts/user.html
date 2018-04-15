@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %} {% if error %} <h3>{{ error }}</h3>
+<br />
+<br /> {% else %}
+
+
+<h1>Posts by user {{ user.username }}</h1>
+
+<br />
+<br /> {% for post in posts.all %}
+
+<table class="table-responsive">
+    <tr>
+        <td style="padding-right: 20px;">
+            <a href="#" onclick="document.getElementById('frmUpvote{{ post.id }}').submit()">
+                <i class="fas fa-caret-up"></i>
+            </a>
+            <br/> {{ post.votes_total }}
+            <br/>
+            <a href="#" onclick="document.getElementById('frmDownvote{{ post.id }}').submit()">
+                <i class="fas fa-caret-down"></i>
+            </a>
+        </td>
+        <td>
+            <a href={{post.url}}>{{ post.title }}</a>
+            <br /> {{post.pub_date_pretty}} by {{post.author.username}}
+        </td>
+    </tr>
+</table>
+
+<form method="POST" id="frmDownvote{{ post.id }}" action="{% url 'posts:downvote' post.id %}">
+    {% csrf_token %}
+    <input type="hidden" value="Down" />
+</form>
+<form method="POST" id="frmUpvote{{ post.id }}" action="{% url 'posts:upvote' post.id %}">
+    {% csrf_token %}
+    <input type="hidden" value="Up" />
+</form>
+<br /> {% endfor %} {% endif %}{% endblock %}

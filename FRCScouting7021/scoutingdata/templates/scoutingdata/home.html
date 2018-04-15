@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+ 
+{% block content %}
+{% if error %} 
+<h3>{{ error }}</h3>
+<br />
+<br /> 
+{% else %}
+
+<h1>FRC Scouting 7021</h1>
+
+<h3>What team are you with?</h3>
+<form>
+    <div class="form-group">
+        <label for="txtTeamNum">Team number</label>
+        <input type="text" class="form-control" id="txtTeamNum" aria-describedby="emailHelp" placeholder="Enter team number">
+    </div>
+    <div class="form-group">
+        <label for="txtPassword">Password</label>
+        <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+    </div>
+
+    <input type="submit" name="Submit" />
+</form>
+
+Get team data (example: 7021) 
+Need events, and matches for each event
+
+Ask for team // and team password
+Redirect to team page
+On team page, have link to closest event, with links to all other events as well
+On event page, have link to create scouting data for that event
+On scouting data input page, have dropdown of all matches for that event
+Allow user to select which match they'd like to scout for
+Fill in dropdown of teams for that match
+Select team
+All other data
+Submit
+Bring back to either event page or just new instance of scouting data page with a success label
+
+{% endif %}
+{% endblock %}
