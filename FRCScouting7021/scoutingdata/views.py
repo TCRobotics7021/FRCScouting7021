@@ -31,17 +31,17 @@ def team(request, teamNum):
     # https://www.thebluealliance.com/api/v3/team/{TEAM_CODE}/events/simple
     
     call = endpoint + "team/frc" + str(teamNum) + "/events/simple"
-
+    
     r = requests.get(call, headers={'X-TBA-Auth-Key':api_key})
 
     if r.status_code == 200:
         # successful call
-        logger.error('it worked')
+        parsed_json = r.json()
+        return render(request, 'scoutingdata/team.html', {'teamNum':teamNum,'events':parsed_json})
+
     else:
         # unsuccessful call
         return render(request, 'scoutingdata/event.html', {"error":"Could not retrieve team events."})
-
-    return render(request, 'scoutingdata/team.html', {'teamNum':teamNum})
 
 def event(request, eventCode):
     return render(request, 'scoutingdata/event.html', {'eventCode':eventCode})

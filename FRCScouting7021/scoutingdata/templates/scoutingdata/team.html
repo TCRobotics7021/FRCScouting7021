@@ -9,5 +9,15 @@
 
 <h1>Team {{ teamNum }}</h1>
 
+<h2>Events</h2>
+
+{% for event in events %}
+
+<h3>{{ event.name }}</h3>
+
+{{ event.city }}
+
+{% endfor %}
+
 {% endif %}
 {% endblock %}
